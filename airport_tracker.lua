@@ -195,6 +195,11 @@ local lastError = ""
 local lastAircraftKnob = nil
 local lastAirportKnob = nil
 
+local panOffsetX = 0
+local panOffsetY = 0
+local PAN_SPEED = 0.15
+local PAN_DEADZONE = 0.1
+
 --------------------------------------------------
 -- General helpers
 --------------------------------------------------
@@ -385,9 +390,9 @@ function radarPosition(
 
     return
         width / 2 +
-        east / radius * scale,
+        (east - panOffsetX) / radius * scale,
         height / 2 -
-        north / radius * scale
+        (north - panOffsetY) / radius * scale
 end
 
 
@@ -405,9 +410,9 @@ function radarOffsetPosition(
 
     return
         width / 2 +
-        east / radius * scale,
+        (east - panOffsetX) / radius * scale,
         height / 2 -
-        north / radius * scale
+        (north - panOffsetY) / radius * scale
 end
 
 --------------------------------------------------
@@ -1821,6 +1826,45 @@ function handleScreenButtons()
 end
 
 
+function handleStick()
+    if ranges[rangeIndex] >= 10 then
+        panOffsetX = 0
+        panOffsetY = 0
+        return
+    end
+
+    local stickX = gdt.Stick0.X
+    local stickY = gdt.Stick0.Y
+
+    if math.abs(stickX) < PAN_DEADZONE then
+        stickX = 0
+    end
+
+    if math.abs(stickY) < PAN_DEADZONE then
+        stickY = 0
+    end
+
+    if stickX == 0 and stickY == 0 then
+        return
+    end
+
+    local maxPan =
+        10 - ranges[rangeIndex]
+
+    panOffsetX = clamp(
+        panOffsetX + stickX * PAN_SPEED,
+        -maxPan,
+        maxPan
+    )
+
+    panOffsetY = clamp(
+        panOffsetY - stickY * PAN_SPEED,
+        -maxPan,
+        maxPan
+    )
+end
+
+
 function handleButtons()
     if gdt.LedButton0.ButtonDown then
         debugLog(
@@ -1864,40 +1908,7 @@ function handleButtons()
         end
     end
 
-    if gdt.LedButton1.ButtonDown then
-        if #aircraft == 0 then
-            debugWarning(
-                "Follow button pressed with no aircraft"
-            )
 
-            return
-        end
-
-        followMode =
-            not followMode
-
-        if followMode then
-            selectedHex =
-                aircraft[
-                    aircraftIndex
-                ].hex
-
-            debugLog(
-                "Follow enabled for " ..
-                tostring(
-                    aircraft[
-                        aircraftIndex
-                    ].callsign
-                ) ..
-                ", hex=" ..
-                tostring(selectedHex)
-            )
-        else
-            debugLog(
-                "Follow disabled"
-            )
-        end
-    end
 end
 
 --------------------------------------------------
@@ -2783,12 +2794,6 @@ function updateLedButtons()
         networkState == "loading"
             and flash
         or networkState == "online"
-
-    gdt.LedButton1.LedColor =
-        AMBER
-
-    gdt.LedButton1.LedState =
-        followMode
 end
 
 --------------------------------------------------
@@ -3015,6 +3020,7 @@ function update()
     handleAirportKnob()
     handleAircraftKnob()
     handleScreenButtons()
+    handleStick()
     handleButtons()
 
     updateRequestTimeout()
