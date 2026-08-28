@@ -1,16 +1,3 @@
-Real-time ADS-B flight tracker that displays live aircraft on a radar scope with geographic airport maps from OpenStreetMap.
+Live ADS-B flight tracker with radar scope, geographic airport maps, traffic list, and aircraft details. Tracks real aircraft around 6 Colorado airports using public APIs. Pan, zoom (1–10 NM), and browse traffic in real time.
 
-Features:
-• Live aircraft positions from ADSB.FI and ADSB.LOL with automatic failover
-• Radar display with range rings and detailed airport maps (runways, taxiways, buildings)
-• Traffic list with callsign, status, distance, altitude, and speed
-• Aircraft detail panel (registration, type, squawk, vertical rate, bearing)
-• 4 zoom levels: 1, 3, 5, 10 NM
-• Stick pan navigation to explore the full 10 NM area when zoomed in
-• Aircraft trails, emergency squawk alerts (7500/7600/7700)
-• Adaptive polling with rate-limit handling
-• Settings saved to FlashMemory
-
-Supported airports: KAPA, KDEN, KBJC, KFTG, KCOS, KASE (Colorado region)
-
-Source code: https://github.com/Kalebm749/Retro_Gadgets_Flight_Tracker
+Source: https://github.com/Kalebm749/Retro_Gadgets_Flight_Tracker
