@@ -6,6 +6,8 @@ A real-time ADS-B aircraft tracker built for [Retro Gadgets](https://store.steam
 ![Language](https://img.shields.io/badge/Language-Lua-blue)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
+**[Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3791669640)**
+
 ---
 
 ## Features
