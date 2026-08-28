@@ -197,7 +197,7 @@ local lastAirportKnob = nil
 
 local panOffsetX = 0
 local panOffsetY = 0
-local PAN_SPEED = 0.15
+local PAN_SPEED = 0.02
 local PAN_DEADZONE = 0.1
 
 --------------------------------------------------

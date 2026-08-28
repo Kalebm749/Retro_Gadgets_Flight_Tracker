@@ -190,7 +190,7 @@ local REQUEST_TIMEOUT = 20          -- Seconds before aborting a request
 local STARTUP_DELAY = 1.5           -- Seconds before first request
 local DRAW_INTERVAL = 0.1           -- Seconds between screen redraws
 local MAX_TRAIL_POINTS = 10         -- Max trail history per aircraft
-local PAN_SPEED = 0.15              -- NM per tick stick pan speed
+local PAN_SPEED = 0.02              -- NM per tick stick pan speed
 local PAN_DEADZONE = 0.1            -- Stick deadzone threshold
 ```
 
