@@ -1862,7 +1862,7 @@ function handleStick()
     )
 
     panOffsetY = clamp(
-        panOffsetY - stickY * PAN_SPEED,
+        panOffsetY + stickY * PAN_SPEED,
         -maxPan,
         maxPan
     )
