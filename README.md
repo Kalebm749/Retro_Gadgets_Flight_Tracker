@@ -119,7 +119,7 @@ When viewing at 1, 3, or 5 NM range, the radar only shows a portion of the 10 NM
 | 5 NM | ±5 NM | Moderate pan range |
 | 10 NM | None (disabled) | Full area already visible |
 
-Pan automatically resets to center when switching to the 10 NM range.
+Pan automatically resets to center when switching to the 10 NM range or changing range/airport.
 
 ---
 
@@ -190,7 +190,7 @@ local REQUEST_TIMEOUT = 20          -- Seconds before aborting a request
 local STARTUP_DELAY = 1.5           -- Seconds before first request
 local DRAW_INTERVAL = 0.1           -- Seconds between screen redraws
 local MAX_TRAIL_POINTS = 10         -- Max trail history per aircraft
-local PAN_SPEED = 0.005             -- NM per tick stick pan speed
+local PAN_SPEED = 0.002             -- NM per tick stick pan speed
 local PAN_DEADZONE = 0.1            -- Stick deadzone threshold
 ```
 

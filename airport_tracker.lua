@@ -197,7 +197,7 @@ local lastAirportKnob = nil
 
 local panOffsetX = 0
 local panOffsetY = 0
-local PAN_SPEED = 0.005
+local PAN_SPEED = 0.002
 local PAN_DEADZONE = 0.1
 
 --------------------------------------------------
@@ -1646,6 +1646,8 @@ function resetAirportView()
     aircraftIndex = 1
     selectedHex = nil
     followMode = false
+    panOffsetX = 0
+    panOffsetY = 0
 
     if requestHandle then
         debugLog(
@@ -1769,11 +1771,13 @@ function setRadarRange(newIndex)
     end
 
     rangeIndex = newIndex
+    panOffsetX = 0
+    panOffsetY = 0
 
     debugLog(
         "Radar range changed to " ..
         tostring(ranges[rangeIndex]) ..
-        " NM"
+        " NM (pan reset)"
     )
 
     applyRangeFilter()
